@@ -1,0 +1,21 @@
+replicaCount: 3
+image:
+  repository: docker1xbdx/math-app
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8010
+
+ingress:
+  enabled: true
+  hostname: abdellahiabdellahi-math.horizon-workspaces.com
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+
+persistence:
+  enabled: true
+  size: 1Gi
+  storageClass: gp2
+

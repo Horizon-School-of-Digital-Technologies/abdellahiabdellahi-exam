@@ -1,0 +1,32 @@
+{{- include "_helpers.tpl" . }}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mathapp-chart.fullname" . }}
+  labels:
+    app: mathapp
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: mathapp
+  template:
+    metadata:
+      labels:
+        app: mathapp
+    spec:
+      containers:
+        - name: mathapp-container
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8010
+          volumeMounts:
+            - name: mathapp-storage
+              mountPath: /tmp/data
+      volumes:
+        - name: mathapp-storage
+          persistentVolumeClaim:
+            claimName: {{ include "mathapp-chart.fullname" . }}-pvc
+

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mathapp-chart.fullname" . }}-service
+  labels:
+    app: mathapp
+spec:
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 8010
+  selector:
+    app: mathapp
+

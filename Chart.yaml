@@ -1,0 +1,5 @@
+apiVersion: v2
+name: mathapp-chart
+description: A Helm chart for deploying the MathApp application.
+version: 0.1.0
+
